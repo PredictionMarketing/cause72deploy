@@ -1,0 +1,18 @@
+OPTION 2 — Dark Competitive (More Aggressive)
+Signals: power, dominance, competitive separation.
+Primary: Midnight Blue
+#0A1624
+Secondary: Slate
+#2E3A46
+Accent: Burnt Copper
+#B87333
+Background: White
+#FFFFFF
+Text: Almost Black
+#111111
+Why this works:
+
+Dark but not black
+Copper feels strong and rare
+Feels capital-heavy and serious
+Good for PE-facing positioning
