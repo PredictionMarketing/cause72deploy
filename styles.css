@@ -133,7 +133,7 @@ img {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 0 60px;
+    padding: 160px 0 80px;
     position: relative;
     overflow: hidden;
 }
@@ -153,7 +153,7 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
-    align-items: center;
+    align-items: start;
     position: relative;
     z-index: 2;
 }
