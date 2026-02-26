@@ -118,8 +118,9 @@ nav {
 }
 
 .nav-logo img {
-    height: 120px;
+    height: 180px;
     width: auto;
+    filter: brightness(2.5) contrast(0.9);
 }
 
 .nav-cta {
