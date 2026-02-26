@@ -100,7 +100,7 @@ img {
 }
 
 .nav-brand img {
-    height: 36px;
+    height: 60px;
     width: auto;
     filter: brightness(2.5) contrast(0.9);
 }
@@ -109,13 +109,13 @@ img {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 28px;
+    padding: 16px 36px;
     border-radius: 50px;
     background: var(--accent);
     color: var(--white);
     font-family: var(--contentfont);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     border: none;
     cursor: pointer;
     transition: all 0.3s;
