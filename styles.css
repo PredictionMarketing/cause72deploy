@@ -195,12 +195,13 @@ img {
 .hero-media {
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border-hover);
     background: var(--bg-card);
     aspect-ratio: 16/10;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 40px rgba(45, 155, 240, 0.08);
     position: relative;
 }
 
@@ -269,7 +270,7 @@ img {
 
 .section-header h2 {
     font-family: var(--headlinefont);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-size: clamp(2.4rem, 4.5vw, 3.4rem);
     font-weight: 700;
     color: var(--white);
     margin-bottom: 16px;
