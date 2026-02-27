@@ -195,13 +195,13 @@ img {
 .hero-media {
     border-radius: 20px;
     overflow: hidden;
-    border: 2px solid rgba(45, 155, 240, 0.35);
+    border: 3px solid rgba(45, 155, 240, 0.5);
     background: var(--bg-card);
     aspect-ratio: 16/10;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 40px rgba(45, 155, 240, 0.1), 0 0 0 1px rgba(45, 155, 240, 0.08);
+    box-shadow: 0 0 25px rgba(45, 155, 240, 0.2), 0 8px 40px rgba(0, 0, 0, 0.4);
     position: relative;
 }
 
@@ -263,7 +263,7 @@ img {
 }
 
 .section-gradient {
-    background: linear-gradient(180deg, #0c1a33 0%, var(--bg-primary) 50%);
+    background: linear-gradient(180deg, #1a3355 0%, #0f1d33 35%, var(--bg-primary) 100%);
 }
 
 .section-header {
@@ -299,20 +299,20 @@ img {
 
 .feature-card {
     background: rgba(12, 21, 37, 0.6);
-    border: 1px solid var(--border);
+    border: 1px solid rgba(45, 155, 240, 0.2);
     border-radius: 25px;
     padding: 44px 28px;
     text-align: center;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .feature-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-8px) rotateX(2deg) rotateY(-1deg);
-    box-shadow: 0 0 0 1px var(--accent), 0 0 30px var(--accent-glow), 0 20px 60px rgba(0, 0, 0, 0.4);
+    border-color: #2d9bf0;
+    transform: translateY(-10px);
+    box-shadow: 0 0 0 2px #2d9bf0, 0 0 40px rgba(45, 155, 240, 0.4), 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .feature-card .icon-box {
@@ -560,6 +560,17 @@ img {
 .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Once cards are visible, let their own hover work */
+.feature-card.fade-up.visible {
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card.fade-up.visible:hover {
+    transform: translateY(-10px);
+    border-color: #2d9bf0;
+    box-shadow: 0 0 0 2px #2d9bf0, 0 0 40px rgba(45, 155, 240, 0.4), 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 /* ═══  RESPONSIVE  ═══ */
