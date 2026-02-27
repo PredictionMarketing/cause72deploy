@@ -314,8 +314,8 @@ img {
 }
 
 .feature-card.is-hovered {
-    border-color: rgba(45, 155, 240, 0.5);
-    box-shadow: 0 0 40px rgba(45, 155, 240, 0.3), 0 16px 64px rgba(45, 155, 240, 0.2);
+    border-color: rgba(45, 155, 240, 0.7);
+    box-shadow: 0 0 20px rgba(45, 155, 240, 0.4), 0 0 60px rgba(45, 155, 240, 0.25), 0 16px 64px rgba(45, 155, 240, 0.15);
 }
 
 .feature-card .icon-box {
