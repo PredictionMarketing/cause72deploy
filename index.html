@@ -277,8 +277,11 @@
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
         // ═══ OMNIA-STYLE 3D TILT HOVER ═══
-        // Uses requestAnimationFrame for smooth perspective-based rotation
-        document.querySelectorAll('.feature-card').forEach(card => {
+        // Only starts after card fade-in completes so CSS transition doesn't fight JS
+        function initTilt(card) {
+            // Kill CSS transform transition so it doesn't fight the RAF loop
+            card.style.transition = 'box-shadow 0.3s, border-color 0.3s';
+
             let currentX = 0, currentY = 0, currentScale = 1;
             let targetX = 0, targetY = 0, targetScale = 1;
             const maxTilt = 10;
@@ -314,7 +317,20 @@
                 targetY = 0;
                 targetScale = 1;
             });
-        });
+        }
+
+        // Watch for cards becoming visible, then init tilt
+        const tiltObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Wait for fade-up animation to finish (0.7s), then init tilt
+                    setTimeout(() => initTilt(entry.target), 800);
+                    tiltObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card').forEach(card => tiltObserver.observe(card));
     </script>
 </body>
 
