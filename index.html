@@ -9,7 +9,7 @@
         content="Lower your cost per case. Cause72 provides 72-hour accident reports with full contact information at scale for high-volume PI operators.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles.css?v=20260227a">
+    <link rel="stylesheet" href="styles.css?v=20260227b">
 </head>
 
 <body>
@@ -275,6 +275,20 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Card hover via JS — inline styles beat all CSS specificity
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+                card.style.borderColor = '#2d9bf0';
+                card.style.boxShadow = '0 0 0 2px #2d9bf0, 0 0 40px rgba(45,155,240,0.4), 0 20px 60px rgba(0,0,0,0.5)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.borderColor = '';
+                card.style.boxShadow = '';
+            });
+        });
     </script>
 </body>
 

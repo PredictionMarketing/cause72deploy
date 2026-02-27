@@ -1,0 +1,3 @@
+Future of AI & Machine Learning
+
+neuromorphic computing2, which mimics the neural structure of the human brain
