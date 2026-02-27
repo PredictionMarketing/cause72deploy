@@ -9,7 +9,7 @@
         content="Lower your cost per case. Cause72 provides 72-hour accident reports with full contact information at scale for high-volume PI operators.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles.css?v=20260227b">
+    <link rel="stylesheet" href="styles.css?v=20260227c">
 </head>
 
 <body>
@@ -276,17 +276,43 @@
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        // Card hover via JS — inline styles beat all CSS specificity
+        // ═══ OMNIA-STYLE 3D TILT HOVER ═══
+        // Uses requestAnimationFrame for smooth perspective-based rotation
         document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px)';
-                card.style.borderColor = '#2d9bf0';
-                card.style.boxShadow = '0 0 0 2px #2d9bf0, 0 0 40px rgba(45,155,240,0.4), 0 20px 60px rgba(0,0,0,0.5)';
+            let currentX = 0, currentY = 0, currentScale = 1;
+            let targetX = 0, targetY = 0, targetScale = 1;
+            const maxTilt = 10;
+            const hoverScale = 1.03;
+            const easing = 0.08;
+
+            function animate() {
+                currentX += (targetX - currentX) * easing;
+                currentY += (targetY - currentY) * easing;
+                currentScale += (targetScale - currentScale) * easing;
+                card.style.transform = `perspective(1000px) rotateX(${currentY}deg) rotateY(${currentX}deg) scale(${currentScale})`;
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            function setTarget(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                targetX = ((x - rect.width / 2) / (rect.width / 2)) * -maxTilt;
+                targetY = ((y - rect.height / 2) / (rect.height / 2)) * maxTilt;
+            }
+
+            card.addEventListener('mouseenter', e => {
+                card.classList.add('is-hovered');
+                targetScale = hoverScale;
+                setTarget(e);
             });
+            card.addEventListener('mousemove', setTarget);
             card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-                card.style.borderColor = '';
-                card.style.boxShadow = '';
+                card.classList.remove('is-hovered');
+                targetX = 0;
+                targetY = 0;
+                targetScale = 1;
             });
         });
     </script>
