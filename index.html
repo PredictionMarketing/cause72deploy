@@ -353,6 +353,30 @@
             border-color: rgba(26, 111, 212, 0.5);
         }
 
+        /* ── Hero Image Frame (replaces video-frame) ────────────────── */
+        .hero-image-frame {
+            background-color: var(--video-bg);
+            border: 3px solid rgba(26, 111, 212, 0.45);
+            border-radius: 20px;
+            padding: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-image-frame:hover {
+            box-shadow: rgba(26, 111, 212, 0.35) 0px 20px 64px, 0 8px 32px rgba(0, 0, 0, 0.4);
+            transform: translateY(-6px);
+            border-color: rgba(26, 111, 212, 0.7);
+        }
+
+        .hero-image-frame img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
         .video-placeholder {
             width: 100%;
             padding-bottom: 56.25%;
@@ -413,11 +437,13 @@
 
         .hero-limited {
             font-family: var(--contentfont);
-            color: #d4d4d4;
+            color: #e0e0e0;
             font-style: italic;
-            font-size: 1.35rem;
+            font-size: 1.6rem;
+            font-weight: 500;
             text-align: center;
-            padding: 10px 0;
+            padding: 14px 0;
+            letter-spacing: -0.01em;
         }
 
         /* Scroll Indicator */
@@ -1235,7 +1261,7 @@
                     <h1 class="hero-headline">
                         <strong>
                             <span class="white">Lower Your Cost Per Case </span>
-                            <span class="accent">with 72-Hour Accident Inventory</span>
+                            <span class="accent">Stop Overpaying for Clicks</span>
                         </strong>
                     </h1>
                     <p class="hero-subtext">
@@ -1247,13 +1273,13 @@
 
                 <!-- Right Column: Video + CTA -->
                 <div class="hero-right animate-right">
-                    <div class="hero-image-frame">
-                        <img src="assets/c72mva.png" alt="Insurance claim denied — accident victims need representation"
-                            style="width:100%;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+                    <div class="hero-image-frame tilt-hover animate-right">
+                        <img src="assets/c72mva.png"
+                            alt="Insurance claim denied — accident victims need representation">
                     </div>
 
                     <div class="hero-cta-wrapper">
-                        <a href="schedule-call" class="hero-cta-btn">Schedule Strategy Call</a>
+                        <a href="schedule-call" class="hero-cta-btn">Check Zip Availability</a>
                     </div>
 
                     <p class="hero-limited">Limited Partnerships Available</p>
@@ -1282,7 +1308,7 @@
 
             <!-- 3 Cards -->
             <div class="value-cards-row">
-                <div class="glass-card animate-up">
+                <div class="glass-card animate-up tilt-hover">
                     <div class="value-icon">
                         <i class="fas fa-brain"></i>
                     </div>
@@ -1291,7 +1317,7 @@
                         phone, email, every person involved.</p>
                 </div>
 
-                <div class="glass-card animate-up">
+                <div class="glass-card animate-up tilt-hover">
                     <div class="value-icon">
                         <i class="fas fa-bullseye"></i>
                     </div>
@@ -1300,7 +1326,7 @@
                         participants with backfilled contact information.</p>
                 </div>
 
-                <div class="glass-card animate-up">
+                <div class="glass-card animate-up tilt-hover">
                     <div class="value-icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
@@ -1386,7 +1412,7 @@
             </div>
 
             <div class="partnership-cards-row">
-                <div class="partnership-card animate-up">
+                <div class="partnership-card animate-up tilt-hover">
                     <div class="partnership-icon">
                         <div class="rotate-icon">
                             <i class="fas fa-chart-line"></i>
@@ -1397,7 +1423,7 @@
                         intake operations intelligently.</p>
                 </div>
 
-                <div class="partnership-card animate-up">
+                <div class="partnership-card animate-up tilt-hover">
                     <div class="partnership-icon">
                         <div class="rotate-icon">
                             <i class="fas fa-gem"></i>
@@ -1408,7 +1434,7 @@
                         deployment over auction-driven volatility.</p>
                 </div>
 
-                <div class="partnership-card animate-up">
+                <div class="partnership-card animate-up tilt-hover">
                     <div class="partnership-icon">
                         <div class="rotate-icon">
                             <i class="fas fa-crosshairs"></i>
@@ -1461,7 +1487,7 @@
                 </h2>
                 <p class="cta-subtitle">Limited availability. Schedule your strategy call to explore a strategic
                     partnership.</p>
-                <a href="schedule-call" class="final-cta-btn">Schedule Strategy Call</a>
+                <a href="schedule-call" class="final-cta-btn">Check Zip Availability</a>
 
                 <ul class="cta-bullets">
                     <li>Strategic Partnerships</li>

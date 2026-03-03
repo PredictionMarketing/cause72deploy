@@ -1,6 +1,14 @@
 {
     "rewrites": [
         {
+            "source": "/schedule-call",
+            "destination": "/schedule-call.html"
+        },
+        {
+            "source": "/schedule-call-v2",
+            "destination": "/schedule-call-v2.html"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
