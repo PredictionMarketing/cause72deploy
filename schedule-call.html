@@ -301,15 +301,18 @@
         /* ─── Right Column (Calendar) — 56.8% ────────────── */
         .calendar-col {
             width: 56.8%;
-            border: 1px solid var(--color-border);
-            border-radius: 20px;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(26, 111, 212, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 4px solid rgba(26, 111, 212, 0.5);
+            border-radius: 24px;
+            padding: 10px;
+            background: rgba(11, 18, 27, 0.6);
+            box-shadow: 0 0 48px rgba(26, 111, 212, 0.15), 0 16px 48px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
-            min-height: 580px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
+        }
+
+        .calendar-col:hover {
+            border-color: rgba(26, 111, 212, 0.75);
+            box-shadow: 0 0 64px rgba(26, 111, 212, 0.25), 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         /* Calendar placeholder */
@@ -550,36 +553,15 @@
                 </div>
             </div>
 
-            <!-- Right Column: Calendar (56.8%) -->
+            <!-- Right Column: Calendar -->
             <div class="calendar-col animate-right">
-                <!--
-                    ═══════════════════════════════════════════════════
-                    EMBED YOUR CALENDAR HERE
-                    
-                    Option 1: Calendly
-                    <div class="calendly-inline-widget" 
-                         data-url="https://calendly.com/YOUR-LINK"
-                         style="min-width:320px;height:560px;">
-                    </div>
-                    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                    
-                    Option 2: GoHighLevel / LeadConnector
-                    Paste your appointment widget embed code here.
-                    ═══════════════════════════════════════════════════
-                -->
-                <div class="calendar-placeholder">
-                    <i class="far fa-calendar-alt cal-icon"></i>
-                    <h3>Cause72 Partnership Call</h3>
-                    <div class="cal-meta">
-                        <span><i class="far fa-clock"></i> 30 Mins</span>
-                        <span><i class="fas fa-globe"></i> America/New_York (EST)</span>
-                    </div>
-                    <p>Select a date and time to discuss territory availability and partnership criteria for your firm.
-                    </p>
-                    <a href="https://calendly.com/YOUR-LINK" class="btn-book" target="_blank" rel="noopener">
-                        Schedule Meeting <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget"
+                    data-url="https://calendly.com/intelligence-cause72/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=3b82f6&text_color=ffffff&primary_color=1a6fd4"
+                    style="min-width:320px;height:700px;width:100%;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"
+                    async></script>
+                <!-- Calendly inline widget end -->
             </div>
 
         </div>
