@@ -1,15 +1,1198 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="assets/favicon/favicon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="assets/favicon/favicon-16.png" sizes="16x16">
+    <link rel="apple-touch-icon" href="assets/favicon/favicon-180.png">
     <title>Cause72 | Upstream Case Supply — 72-Hour Accident Intelligence</title>
-    <meta name="description"
-        content="Lower your cost per case. Cause72 provides 72-hour accident reports with full contact information at scale for high-volume PI operators.">
+    <meta name="description" content="The Intelligence Layer Behind Top PI Firms">
+    <meta property="og:title" content="Cause72 | Upstream Case Supply — 72-Hour Accident Intelligence">
+    <meta property="og:description" content="The Intelligence Layer Behind Top PI Firms">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles.css?v=20260227c">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           CAUSE72 — PIXEL-PERFECT OMNIA CLONE
+           Built from exact Omnia source tokens
+           ═══════════════════════════════════════════════════════════ */
+
+        :root {
+            --bg-body: #0b121bff;
+            --bg-header: #0a0e17ff;
+            --accent: #1A6FD4ff;
+            --accent-hover: #3A8EF0;
+            --text-color: #94a3b8ff;
+            --white: #ffffff;
+            --black: #000000;
+            --transparent: transparent;
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-bg-hover: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-hover: rgba(26, 111, 212, 0.3);
+            --card-bg: rgba(15, 23, 42, 0.1);
+            --video-bg: #0d152bff;
+            --video-border: rgba(26, 111, 212, 0.2);
+            --headlinefont: 'Syne', sans-serif;
+            --contentfont: 'Inter', system-ui, sans-serif;
+            --spacefont: 'Space Grotesk', sans-serif;
+            --link-color: var(--accent);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        ::selection {
+            background: #1A6FD4;
+            color: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--contentfont);
+            background-color: var(--bg-body);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        /* ── Scroll Progress Bar ── */
+        #scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: #1A6FD4;
+            z-index: 99999;
+            transition: width 0.1s linear;
+        }
+
+        /* ── Section Containers ── */
+        .section-inner {
+            max-width: 1170px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ═══════════════════════════════════════
+           HEADER / NAV
+           ═══════════════════════════════════════ */
+        /* ── LAYOUT CONSTRAINT: Height is defined by header-inner padding + logo max-height.
+           Do NOT add height or overflow:hidden here — that clips content.
+           Formula: padding-top(12) + logo-max-height(40) + padding-bottom(12) = ~64px ── */
+        .site-header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .tilt-hover {
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            background: rgba(15, 23, 42, 0.8) !important;
+        }
+
+        .tilt-hover.is-hovered {
+            box-shadow: rgba(26, 111, 212, 0.2) 0px 16px 64px;
+            border-color: rgba(26, 111, 212, 0.5);
+        }
+
+        .tilt-hover .rotate-icon {
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .tilt-hover:hover .rotate-icon {
+            transform: rotate(11deg);
+        }
+
+        /* Additional step-card override: activate tilt exactly like Omnia */
+        .step-card.tilt-hover {
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .step-card.tilt-hover:hover {
+            /* keep Omnia glass bg on tilt */
+            background: rgba(15, 23, 42, 0.8) !important;
+        }
+
+        /* ── Padding here is what sets the nav height. Change this, not the header height. ── */
+        .header-inner {
+            max-width: 1170px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 5px;
+            /* 12 + 40(logo) + 12 = ~64px total header */
+        }
+
+        .header-logo-col {
+            width: 29.1%;
+        }
+
+        /* ── ASSET CONSTRAINT: Logo is capped at 40px. Larger logos scale down automatically.
+           Header height stays constant because it's driven by padding, not by this image. ── */
+        .header-logo {
+            max-height: 40px;
+            width: auto;
+            display: block;
+            transform-origin: left center;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.12);
+            opacity: 1;
+        }
+
+        .header-cta-col {
+            width: 70.9%;
+            text-align: right;
+        }
+
+        .cta-btn-nav {
+            font-family: var(--contentfont);
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 20px 32px;
+            border: 1px solid var(--transparent);
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta-btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(26, 111, 212, 0.3);
+            color: var(--white);
+        }
+
+        /* ═══════════════════════════════════════
+           HERO SECTION
+           ═══════════════════════════════════════ */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 8rem 0 4rem;
+            overflow: hidden;
+        }
+
+        /* ── Hero → Body fade ── */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 160px;
+            background: linear-gradient(to bottom, transparent 0%, var(--bg-body) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Background gradient orbs */
+        .hero-bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #1A6FD4 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #3B82F6 0%, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: 7s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #2B4CB6 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-50px, 50px) scale(0.9);
+            }
+        }
+
+        .hero-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-left {
+            width: 49.8%;
+            padding: 0 5px 10px;
+        }
+
+        .hero-right {
+            width: 50.2%;
+            padding: 10px 5px 100px;
+        }
+
+        .hero-headline {
+            font-family: var(--headlinefont);
+            letter-spacing: -0.02em;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            font-weight: 700;
+            line-height: 1.3;
+            padding-right: 40px;
+            margin-bottom: 0;
+        }
+
+        .hero-headline .white {
+            color: var(--white);
+        }
+
+        .hero-headline .accent {
+            color: var(--accent);
+        }
+
+        .hero-subtext {
+            font-family: var(--contentfont);
+            color: #cccccc;
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.3em;
+            margin-bottom: 100px;
+            margin-top: 20px;
+        }
+
+        /* Video Frame */
+        .video-frame {
+            background-color: var(--video-bg);
+            border: 1px solid var(--video-border);
+            border-radius: 20px;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .video-frame:hover {
+            box-shadow: rgba(26, 111, 212, 0.2) 0px 16px 64px;
+            transform: translateY(-4px);
+            border-color: rgba(26, 111, 212, 0.5);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: linear-gradient(135deg, rgba(26, 111, 212, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .video-placeholder::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 25px;
+            height: 50px;
+            width: 75px;
+            line-height: 2;
+            text-align: center;
+            opacity: 0.75;
+            transition: background-color 0.25s, opacity 0.25s;
+            cursor: pointer;
+        }
+
+        .video-placeholder:hover::after {
+            opacity: 1;
+            background-color: rgba(26, 111, 212, 0.6);
+        }
+
+        .hero-cta-btn {
+            font-family: var(--contentfont);
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 25px 40px;
+            border: 1px solid var(--transparent);
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 40px;
+        }
+
+        .hero-cta-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 40px rgba(26, 111, 212, 0.3);
+            color: var(--white);
+        }
+
+        .hero-cta-wrapper {
+            text-align: center;
+        }
+
+        .hero-limited {
+            font-family: var(--contentfont);
+            color: #d4d4d4;
+            font-style: italic;
+            font-size: 1.35rem;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748B;
+            width: 151px;
+            font-family: var(--contentfont);
+            position: relative;
+            top: 101px;
+            text-align: center;
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(26, 111, 212, 1) 0%, rgba(26, 111, 212, 0) 100%);
+            animation: scrollPulse 2s ease-in-out infinite;
+            position: relative;
+            left: 50%;
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(10px);
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           VALUE PROPS SECTION (3 Glass Cards)
+           ═══════════════════════════════════════ */
+        .value-section {
+            padding: 60px 0;
+        }
+
+        .value-section-header {
+            text-align: center;
+            padding: 0 20%;
+            margin-bottom: 0;
+        }
+
+        .value-section-header h2 {
+            font-family: var(--headlinefont);
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 700;
+            line-height: 64px;
+        }
+
+        .value-section-header .white {
+            color: var(--white);
+        }
+
+        .value-section-header .accent {
+            color: var(--accent);
+        }
+
+        .value-cards-row {
+            display: flex;
+            gap: 20px;
+            padding: 60px 5px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 33.333%;
+            text-align: center;
+        }
+
+        .glass-card:hover {
+            background: var(--glass-bg-hover) !important;
+            border-color: var(--glass-border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px rgba(26, 111, 212, 0.3);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #1A6FD4 0%, #3A8EF0 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-icon::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(135deg, #1A6FD4 0%, #3A8EF0 100%);
+            border-radius: 22px;
+            opacity: 0.3;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .glass-card h3 {
+            font-family: var(--headlinefont);
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .glass-card p {
+            font-family: var(--contentfont);
+            color: var(--text-color);
+            font-size: 1.125rem;
+            font-weight: 400;
+            line-height: 1.6em;
+        }
+
+        /* ═══════════════════════════════════════
+           ENGINEERED FOR PRECISION (Process Header)
+           ═══════════════════════════════════════ */
+        .process-header-section {
+            padding: 100px 0 20px;
+        }
+
+        .process-header-inner {
+            text-align: center;
+        }
+
+        .process-header-inner h2 {
+            font-family: var(--headlinefont);
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 700;
+            line-height: 64px;
+        }
+
+        .process-header-inner h2 .accent {
+            color: var(--accent);
+        }
+
+        .process-header-inner h2 .white {
+            color: var(--white);
+        }
+
+        .process-header-inner .subtitle {
+            font-family: var(--contentfont);
+            color: var(--text-color);
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.3em;
+            margin-top: 10px;
+        }
+
+        /* ═══════════════════════════════════════
+           STEP CARDS (01, 02, 03) w/ Connector Lines
+           ═══════════════════════════════════════ */
+        .steps-section {
+            padding: 40px 0;
+        }
+
+        .step-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 0;
+            position: relative;
+            padding-left: 100px;
+        }
+
+        .step-row::before {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1A6FD4 0%, #3A8EF0 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 800;
+            font-family: var(--headlinefont);
+            top: 0;
+            left: 0;
+            box-shadow: 0px 0px 61px 0px rgba(26, 111, 212, 0.26);
+        }
+
+        .step-row:not(:last-child)::after {
+            position: absolute;
+            content: "";
+            width: 2px;
+            height: 100%;
+            left: 40px;
+            top: 80px;
+            background: linear-gradient(to bottom, rgba(26, 111, 212, 1) 0%, rgba(10, 28, 80, 1) 100%);
+        }
+
+        .step-row:nth-child(1)::before {
+            content: "01";
+        }
+
+        .step-row:nth-child(2)::before {
+            content: "02";
+        }
+
+        .step-row:nth-child(3)::before {
+            content: "03";
+        }
+
+        .step-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .step-card:hover {
+            background: var(--glass-bg-hover) !important;
+            border-color: var(--glass-border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px rgba(26, 111, 212, 0.3);
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 111, 212, 0.1);
+            border: 1px solid rgba(26, 111, 212, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #1A6FD4;
+            margin-bottom: 1rem;
+        }
+
+        .step-card h3 {
+            font-family: var(--headlinefont);
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-family: var(--contentfont);
+            color: var(--text-color);
+            font-size: 1.125rem;
+            font-weight: 400;
+            line-height: 1.6em;
+        }
+
+        /* ═══════════════════════════════════════
+           STRATEGIC PARTNERSHIPS SECTION
+           ═══════════════════════════════════════ */
+        .partnerships-section {
+            padding: 80px 0 40px;
+        }
+
+        .partnerships-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .partnerships-header h2 {
+            font-family: var(--headlinefont);
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 700;
+            line-height: 64px;
+        }
+
+        .partnerships-header .white {
+            color: var(--white);
+        }
+
+        .partnerships-header .accent {
+            color: var(--accent);
+        }
+
+        .partnerships-header .subtitle {
+            font-family: var(--contentfont);
+            color: var(--text-color);
+            font-size: 1.125rem;
+            font-weight: 400;
+            line-height: 1.6em;
+            margin-top: 10px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .partnership-cards-row {
+            display: flex;
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .partnership-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            width: 33.333%;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .partnership-card:hover {
+            background: var(--glass-bg-hover) !important;
+            border-color: var(--glass-border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px rgba(26, 111, 212, 0.3);
+        }
+
+        .partnership-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .rotate-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 111, 212, 0.1);
+            border: 1px solid rgba(26, 111, 212, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #1A6FD4;
+            transition: transform 0.3s ease;
+        }
+
+        .partnership-card:hover .rotate-icon {
+            transform: rotate(11deg);
+        }
+
+        .partnership-card h3 {
+            font-family: var(--headlinefont);
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .partnership-card p {
+            font-family: var(--contentfont);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.6em;
+        }
+
+        /* ═══════════════════════════════════════
+           TESTIMONIAL / TRUST SECTION
+           ═══════════════════════════════════════ */
+        @keyframes shield-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(26, 111, 212, 0.4), 0 0 20px rgba(26, 111, 212, 0.15);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(26, 111, 212, 0), 0 0 40px rgba(26, 111, 212, 0.3);
+            }
+        }
+
+        .trust-section {
+            padding: 40px 0 60px;
+        }
+
+        /* Single centered column — matches Omnia's vertical layout: icon top, text below */
+        .trust-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 24px;
+            padding: 48px 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        /* Shield icon centered at top — same value-icon size as glass cards */
+        .trust-shield-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #1A6FD4 0%, #3A8EF0 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: white;
+            animation: shield-pulse 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .trust-inner .quote {
+            font-family: var(--contentfont);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.6em;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .trust-inner h2 {
+            font-family: var(--headlinefont);
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        .trust-inner h2 .white {
+            color: var(--white);
+        }
+
+        .trust-inner h2 .accent {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .trust-inner {
+                flex-direction: column;
+                gap: 24px;
+                padding: 28px 24px;
+                text-align: center;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           FINAL CTA SECTION
+           ═══════════════════════════════════════ */
+        .final-cta-section {
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/i16mIoXyGeVouAEqPQXE/media/6971cd0eeb392b3d0e7950d5.jpg') center center / cover;
+            opacity: 0.15;
+        }
+
+        .final-cta-inner {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta-inner h2 {
+            font-family: var(--headlinefont);
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 700;
+            line-height: 64px;
+        }
+
+        .final-cta-inner h2 .white {
+            color: var(--white);
+        }
+
+        .final-cta-inner h2 .accent {
+            color: var(--accent);
+        }
+
+        .final-cta-inner .cta-subtitle {
+            color: #cccccc;
+            font-style: italic;
+            font-size: 1.25rem;
+            margin: 10px 0 30px;
+        }
+
+        .final-cta-btn {
+            font-family: var(--contentfont);
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 25px 40px;
+            border: 1px solid var(--transparent);
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .final-cta-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 40px rgba(26, 111, 212, 0.3);
+            color: var(--white);
+        }
+
+        .cta-bullets {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            list-style: none;
+        }
+
+        .cta-bullets li {
+            color: #cccccc;
+            font-family: var(--contentfont);
+            font-size: 1rem;
+        }
+
+        .cta-bullets li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
+        .site-footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 40px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .footer-tagline {
+            color: #cccccc;
+            font-family: var(--contentfont);
+            font-size: 1rem;
+        }
+
+        .footer-right {
+            color: #cccccc;
+            font-family: var(--contentfont);
+            font-size: 0.9rem;
+        }
+
+        /* ═══════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════ */
+        .animate-up,
+        .animate-left,
+        .animate-right {
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-up {
+            transform: translateY(40px);
+        }
+
+        .animate-left {
+            transform: translateX(-40px);
+        }
+
+        .animate-right {
+            transform: translateX(40px);
+        }
+
+        .animate-up.visible,
+        .animate-left.visible,
+        .animate-right.visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .header-cta-col {
+                display: none;
+            }
+
+            .header-logo-col {
+                width: 100%;
+                text-align: center;
+            }
+
+            .header-logo {
+                height: 80px;
+            }
+
+            .hero-section {
+                padding: 4rem 0 2rem;
+            }
+
+            .hero-row {
+                flex-direction: column;
+            }
+
+            .hero-left,
+            .hero-right {
+                width: 100%;
+                padding: 10px 5px;
+            }
+
+            .hero-headline {
+                text-align: center;
+                padding-right: 0;
+                font-size: 1.85rem;
+                line-height: 1.2em;
+            }
+
+            .hero-subtext {
+                text-align: center;
+                margin-bottom: 0;
+            }
+
+            .hero-right {
+                padding-bottom: 10px;
+            }
+
+            .value-section-header {
+                padding: 0;
+            }
+
+            .value-section-header h2 {
+                line-height: 44px;
+            }
+
+            .value-cards-row {
+                flex-direction: column;
+            }
+
+            .glass-card {
+                width: 100%;
+            }
+
+            .process-header-inner h2 {
+                line-height: 44px;
+            }
+
+            .step-row {
+                padding-left: 0;
+                padding-top: 60px;
+                flex-direction: column;
+            }
+
+            .step-row::before {
+                top: -40px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 9;
+            }
+
+            .step-row::after {
+                display: none !important;
+            }
+
+            .partnership-cards-row {
+                flex-direction: column;
+            }
+
+            .partnership-card {
+                width: 100%;
+            }
+
+            .partnerships-header h2 {
+                line-height: 44px;
+            }
+
+            .trust-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .final-cta-inner h2 {
+                line-height: 44px;
+            }
+
+            .cta-bullets {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .scroll-indicator {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 40px;
+            }
+        }
+
+        /* Desktop-only helper */
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none !important;
+            }
+        }
+
+        /* ── Staggered step-card slide-in (play once via JS unobserve) ── */
+        .step-row:nth-child(1).animate-left {
+            transition-delay: 0.05s;
+        }
+
+        .step-row:nth-child(2).animate-left {
+            transition-delay: 0.25s;
+        }
+
+        .step-row:nth-child(3).animate-left {
+            transition-delay: 0.45s;
+        }
+
+        /* Reset delay after visible so hover transitions aren't delayed */
+        .step-row.visible {
+            transition-delay: 0s !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,321 +1200,353 @@
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress-bar"></div>
 
-    <!-- ═══  NAVIGATION  ═══ -->
-    <nav class="navbar">
-        <a href="#" class="nav-brand">
-            <img src="assets/logo/cause72-logo.png" alt="Cause72">
-        </a>
-        <a href="#schedule" class="nav-cta-btn">Schedule Strategy Call</a>
-    </nav>
+    <!-- ═══════════════════════════════════════
+         HEADER
+         ═══════════════════════════════════════ -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="header-logo-col">
+                <a href="/">
+                    <img src="assets/logo/cause72deploy_transparent_logo_no_tagline.png" alt="Cause72"
+                        class="header-logo">
+                </a>
+            </div>
+            <div class="header-cta-col desktop-only">
+                <a href="schedule-call" class="cta-btn-nav">Schedule Strategy Call</a>
+            </div>
+        </div>
+    </header>
 
+    <!-- ═══════════════════════════════════════
+         HERO SECTION
+         ═══════════════════════════════════════ -->
+    <section class="hero-section">
+        <!-- Background Effects -->
+        <div class="hero-bg-elements">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
 
-    <!-- ═══  HERO  ═══ -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-grid fade-up">
-                <div class="hero-text">
-                    <h1>Upstream Case Supply for<br><span class="accent">Intelligent PI Firms</span></h1>
-                    <p class="subtitle">
-                        72-hour accident reports with full contact information — engineered for firms that value case
-                        cost control, not auction-driven channels.
+        <div class="section-inner">
+            <div class="hero-row">
+                <!-- Left Column: Headline + Subtext -->
+                <div class="hero-left animate-left">
+                    <h1 class="hero-headline">
+                        <strong>
+                            <span class="white">The Intelligence Layer Behind </span>
+                            <span class="accent">Top PI Firms</span>
+                        </strong>
+                    </h1>
+                    <p class="hero-subtext">
+                        Pre-qualified, high-intent accident leads delivered within 72 hours for personal injury
+                        attorneys who value precision over volume.
                     </p>
                 </div>
-                <div class="hero-right">
-                    <div class="hero-media">
-                        <span class="placeholder-text">Video / Image Placeholder</span>
+
+                <!-- Right Column: Video + CTA -->
+                <div class="hero-right animate-right">
+                    <div class="video-frame">
+                        <div class="video-placeholder"></div>
                     </div>
-                    <div style="text-align: center; margin-top: 32px;">
-                        <a href="#schedule" class="nav-cta-btn"
-                            style="font-size: 1.15rem; padding: 20px 48px; box-shadow: 0 0 30px var(--accent-glow);">Schedule
-                            Strategy Call →</a>
-                        <p style="margin-top: 16px; font-style: italic; color: var(--text-muted); font-size: 1.35rem;">
-                            Limited Territories Available</p>
+
+                    <div class="hero-cta-wrapper">
+                        <a href="schedule-call" class="hero-cta-btn">Schedule Strategy Call</a>
+                    </div>
+
+                    <p class="hero-limited">Limited Partnerships Available</p>
+
+                    <div class="scroll-indicator desktop-only">
+                        <div class="scroll-line"></div>
+                        Scroll to explore
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Scroll to Explore -->
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            <span class="scroll-text">Scroll to explore</span>
         </div>
     </section>
 
-
-    <!-- ═══  VALUE PROPS — 3 CARDS  ═══ -->
-    <div class="fullSection" style="background: linear-gradient(180deg, #1e3a5f 0%, #122240 30%, #070d17 100%);">
-        <div class="container">
-            <div class="section-header fade-up">
-                <h2>Protecting Your Margins.<br><span class="accent">Lowering Cost Per Case.</span></h2>
+    <!-- ═══════════════════════════════════════
+         VALUE PROPS — 3 Glass Cards
+         ═══════════════════════════════════════ -->
+    <section class="value-section">
+        <div class="section-inner">
+            <!-- Section Header -->
+            <div class="value-section-header animate-up">
+                <h2>
+                    <span class="white">Protecting Your Time.</span><br>
+                    <span class="accent">Maximizing Case Value.</span>
+                </h2>
             </div>
 
-            <div class="features-grid">
-                <div class="feature-card fade-up">
-                    <div class="icon-box">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="8" x2="12" y2="12" />
-                            <line x1="12" y1="16" x2="12.01" y2="16" />
-                        </svg>
+            <!-- 3 Cards -->
+            <div class="value-cards-row">
+                <div class="glass-card animate-up">
+                    <div class="value-icon">
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <h3>72-Hour Intelligence</h3>
-                    <p>Accident reports secured within 72 hours of being entered into county systems — full name, cell
-                        phone, email, every person involved.</p>
+                    <h3>Data-Driven Intelligence</h3>
+                    <p>We utilize accident data, AI, and intelligent systems to find and pre-qualify MVA leads — serving
+                        only cases that match your exact intake criteria.</p>
                 </div>
-                <div class="feature-card fade-up">
-                    <div class="icon-box">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg>
+
+                <div class="glass-card animate-up">
+                    <div class="value-icon">
+                        <i class="fas fa-bullseye"></i>
                     </div>
-                    <h3>Controlled Inventory</h3>
-                    <p>Not recycled data. Not shared call traffic. Not form-fill arbitrage. Documented accident
-                        participants with backfilled contact information.</p>
+                    <h3>100% Custom-Tailored</h3>
+                    <p>Every lead matches your exact qualification criteria. No noise. No waste. Only accident victims
+                        actively seeking representation that meet your requirements.</p>
                 </div>
-                <div class="feature-card fade-up">
-                    <div class="icon-box">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                        </svg>
+
+                <div class="glass-card animate-up">
+                    <div class="value-icon">
+                        <i class="fas fa-network-wired"></i>
                     </div>
-                    <h3>Scalable Advantage</h3>
-                    <p>No auction. No bidding war. No rising ad costs. Expand by purchasing more reports — that's the
-                        scaling model.</p>
+                    <h3>Multi-Channel Mastery</h3>
+                    <p>Proprietary systems combining targeted outreach and paid inbound traffic to deliver high-intent
+                        PI leads at scale.</p>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-    <!-- ═══  PROCESS TIMELINE  ═══ -->
-    <div class="fullSection">
-        <div class="container">
-            <div class="section-header fade-up">
-                <h2>Engineered for <span class="accent">Precision</span></h2>
-                <p>Our proprietary process delivers documented accident participants at scale</p>
-            </div>
-
-            <div class="process-timeline">
-                <div class="process-step fade-up">
-                    <div class="step-number">01</div>
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="3" />
-                                <path
-                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                            </svg>
-                        </div>
-                        <h3>Strategic Onboarding</h3>
-                        <p>We define your geographic allocation, qualification criteria, and volume requirements. Your
-                            territory is locked — first-come, zip-level exclusivity.</p>
-                    </div>
-                </div>
-
-                <div class="process-step fade-up">
-                    <div class="step-number">02</div>
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                            </svg>
-                        </div>
-                        <h3>Intelligent Deployment</h3>
-                        <p>Our national investigative network secures accident reports within 72 hours. Contact
-                            information is completed and backfilled directly from the accident report itself.</p>
-                    </div>
-                </div>
-
-                <div class="process-step fade-up">
-                    <div class="step-number">03</div>
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                                <polyline points="22 4 12 14.01 9 11.01" />
-                            </svg>
-                        </div>
-                        <h3>Real-Time Delivery</h3>
-                        <p>Full-contact accident participants delivered to your operation — name, cell, email —
-                            averaging two contacts per report. Speed to contact optimized.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ═══  WHO THIS IS FOR — 3 CARDS  ═══ -->
-    <div class="fullSection">
-        <div class="container">
-            <div class="section-header fade-up">
-                <h2>Strategic Partnerships <span class="accent">Only</span></h2>
-                <p>We don't work with everyone. We seek operators who deploy capital seriously and value controlled
-                    inventory over commodity channels.</p>
-            </div>
-
-            <div class="partners-grid">
-                <div class="feature-card fade-up">
-                    <div class="icon-box">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-                            <polyline points="17 6 23 6 23 12" />
-                        </svg>
-                    </div>
-                    <h3>High-Volume PI Operators</h3>
-                    <p>Legal marketing companies spending six to seven figures monthly on case acquisition who need a
-                        scalable way to lower cost per signed case.</p>
-                </div>
-                <div class="feature-card fade-up">
-                    <div class="icon-box">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg>
-                    </div>
-                    <h3>PE-Backed Platforms</h3>
-                    <p>Case acquisition platforms with growth mandates that prioritize predictable math and capital
-                        deployment over auction-driven volatility.</p>
-                </div>
-                <div class="feature-card fade-up">
-                    <div class="icon-box">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M8 12l2 2 4-4" />
-                        </svg>
-                    </div>
-                    <h3>Legal Funding Companies</h3>
-                    <p>Organizations deploying capital into case flow that need early access to accident participants
-                        before competitive saturation.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ═══  SOCIAL PROOF BAR  ═══ -->
-    <div class="proof-bar">
-        <div class="container">
-            <p class="quote fade-up">"1,000 reports ≈ 2,000 contacts. Break-even at roughly two signed cases. In most
-                markets, that threshold is not difficult to clear."</p>
-        </div>
-    </div>
-
-
-    <!-- ═══  CTA SECTION  ═══ -->
-    <section class="cta-section" id="schedule">
-        <div class="container">
-            <h2 class="fade-up">Ready to Lower <span class="accent">Cost Per Case?</span></h2>
-            <p class="fade-up">Limited availability. Schedule your strategy call to review zip availability, volume, and
-                allocation structure.</p>
-            <a href="https://calendly.com/intelligence-cause72" target="_blank" rel="noopener noreferrer"
-                class="btn-lg fade-up">Schedule Strategy Call →</a>
         </div>
     </section>
 
-
-    <!-- ═══  FOOTER  ═══ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-tags">
-                <span><span class="dot"></span> Upstream Case Supply</span>
-                <span><span class="dot"></span> 72-Hour Accident Intelligence</span>
-                <span><span class="dot"></span> Controlled Inventory Distribution</span>
+    <!-- ═══════════════════════════════════════
+         ENGINEERED FOR PRECISION (Process Header)
+         ═══════════════════════════════════════ -->
+    <section class="process-header-section">
+        <div class="section-inner">
+            <div class="process-header-inner animate-up">
+                <h2>
+                    <span class="accent">Engineered</span>
+                    <span class="white"> for Precision</span>
+                </h2>
+                <p class="subtitle">Our proprietary process delivers pre-qualified cases at scale</p>
             </div>
-            <div class="footer-brand">CAUSE72</div>
-            <p class="footer-copy">© 2026 Cause72. All rights reserved.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         STEP CARDS (01, 02, 03) w/ Connector Lines
+         ═══════════════════════════════════════ -->
+    <section class="steps-section">
+        <div class="section-inner">
+            <!-- Step 01 -->
+            <div class="step-row animate-left">
+                <div class="step-card tilt-hover">
+                    <div class="step-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Strategic Onboarding</h3>
+                    <p>We engineer a completely custom lead acquisition funnel based on your exact qualification
+                        criteria for motor vehicle accident cases.</p>
+                </div>
+            </div>
+
+            <!-- Step 02 -->
+            <div class="step-row animate-left">
+                <div class="step-card tilt-hover">
+                    <div class="step-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Intelligent Deployment</h3>
+                    <p>Our multi-channel systems activate across targeted outreach and paid channels to reach accident
+                        victims seeking legal representation. AI-powered optimization ensures maximum efficiency.</p>
+                </div>
+            </div>
+
+            <!-- Step 03 -->
+            <div class="step-row animate-left">
+                <div class="step-card tilt-hover">
+                    <div class="step-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Real-Time Delivery</h3>
+                    <p>Pre-qualified MVA leads delivered instantly to your CRM, shared sheets, with text + email alerts.
+                        Speed to lead optimized for conversion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         STRATEGIC PARTNERSHIPS SECTION
+         ═══════════════════════════════════════ -->
+    <section class="partnerships-section">
+        <div class="section-inner">
+            <div class="partnerships-header animate-up">
+                <h2>
+                    <span class="white">Strategic Partnerships</span>
+                    <span class="accent"> Only</span>
+                </h2>
+                <p class="subtitle">We don't work with everyone. We seek strategic growth partners who value long-term
+                    relationships over high volume. Our availability is based on mutual qualification.</p>
+            </div>
+
+            <div class="partnership-cards-row">
+                <div class="partnership-card animate-up">
+                    <div class="partnership-icon">
+                        <div class="rotate-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <h3>High-Volume PI Firms</h3>
+                    <p>Partners who understand the value of pre-qualified leads and are committed to scaling their case
+                        intake operations intelligently.</p>
+                </div>
+
+                <div class="partnership-card animate-up">
+                    <div class="partnership-icon">
+                        <div class="rotate-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                    </div>
+                    <h3>Quality Over Quantity</h3>
+                    <p>Firms that prioritize high-intent, qualified leads over volume metrics and understand strategic
+                        value.</p>
+                </div>
+
+                <div class="partnership-card animate-up">
+                    <div class="partnership-icon">
+                        <div class="rotate-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                    </div>
+                    <h3>Ready to Scale with Precision</h3>
+                    <p>Teams prepared to sign more cases faster while maintaining quality standards through intelligent
+                        lead qualification systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         TESTIMONIAL / TRUST SECTION
+         ═══════════════════════════════════════ -->
+    <section class="trust-section">
+        <div class="section-inner">
+            <div class="trust-inner tilt-hover animate-up">
+                <!-- Shield icon centered at top — same value-icon pattern as glass cards -->
+                <div class="trust-shield-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+
+                <p class="quote">"25+ years of combined experience engineering targeted marketing, digital
+                    infrastructure, and intelligence systems."</p>
+
+                <h2>
+                    <span class="white">Our partners sign cases with </span>
+                    <span class="accent">confidence</span>
+                    <span class="white"> and scale with </span>
+                    <span class="accent">precision</span>
+                    <span class="white">.</span>
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FINAL CTA SECTION
+         ═══════════════════════════════════════ -->
+    <section class="final-cta-section">
+        <div class="final-cta-bg"></div>
+        <div class="section-inner">
+            <div class="final-cta-inner animate-up">
+                <h2>
+                    <span class="white">Ready to </span>
+                    <span class="accent">Move Faster</span>
+                    <span class="white">?</span>
+                </h2>
+                <p class="cta-subtitle">Limited availability. Schedule your strategy call to explore a strategic
+                    partnership.</p>
+                <a href="schedule-call" class="final-cta-btn">Schedule Strategy Call</a>
+
+                <ul class="cta-bullets">
+                    <li>Strategic Partnerships</li>
+                    <li>Premium Lead Quality</li>
+                    <li>Intelligent Systems</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════ -->
+    <footer class="site-footer">
+        <div class="section-inner">
+            <div class="footer-inner">
+                <div class="footer-left">
+                    <a href="/">
+                        <img src="assets/logo/cause72deploy_transparent_logo_no_tagline.png" alt="Cause72"
+                            class="footer-logo">
+                    </a>
+                    <span class="footer-tagline">The Intelligence Layer Behind Top PI Firms</span>
+                </div>
+                <div class="footer-right">
+                    © 2026 Cause72. All rights reserved.
+                </div>
+            </div>
         </div>
     </footer>
 
-
-    <!-- ═══  SCRIPTS  ═══ -->
+    <!-- ═══════════════════════════════════════
+         SCRIPTS
+         ═══════════════════════════════════════ -->
     <script>
-        // Scroll progress bar
+        // Scroll Progress Bar
         window.addEventListener('scroll', () => {
-            const bar = document.getElementById('scroll-progress-bar');
-            const scrollTop = document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            bar.style.width = (scrollTop / docHeight * 100) + '%';
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scroll-progress-bar').style.width = progress + '%';
         });
 
-        // Fade-in on scroll
-        const observer = new IntersectionObserver((entries) => {
+        // Intersection Observer — play once (unobserve after firing)
+        const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                    obs.unobserve(entry.target); // play once only
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.animate-up, .animate-left, .animate-right').forEach(el => {
+            observer.observe(el);
+        });
 
-        // ═══ OMNIA-STYLE 3D TILT HOVER ═══
-        // Only starts after card fade-in completes so CSS transition doesn't fight JS
-        function initTilt(card) {
-            // Kill CSS transform transition so it doesn't fight the RAF loop
-            card.style.transition = 'box-shadow 0.3s, border-color 0.3s';
+        // ── Omnia Tilt-Hover Effect ──────────────────────────────────
+        // Applies to all .tilt-hover elements: 3D rotateX/rotateY on mousemove
+        document.querySelectorAll('.tilt-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('is-hovered');
+            });
 
-            let currentX = 0, currentY = 0, currentScale = 1;
-            let targetX = 0, targetY = 0, targetScale = 1;
-            const maxTilt = 10;
-            const hoverScale = 1.03;
-            const easing = 0.08;
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('is-hovered');
+                // Smoothly reset tilt
+                card.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease';
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                setTimeout(() => {
+                    card.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+                }, 500);
+            });
 
-            function animate() {
-                currentX += (targetX - currentX) * easing;
-                currentY += (targetY - currentY) * easing;
-                currentScale += (targetScale - currentScale) * easing;
-                card.style.transform = `perspective(1000px) rotateX(${currentY}deg) rotateY(${currentX}deg) scale(${currentScale})`;
-                requestAnimationFrame(animate);
-            }
-            animate();
-
-            function setTarget(e) {
+            card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                targetX = ((x - rect.width / 2) / (rect.width / 2)) * -maxTilt;
-                targetY = ((y - rect.height / 2) / (rect.height / 2)) * maxTilt;
-            }
-
-            card.addEventListener('mouseenter', e => {
-                card.classList.add('is-hovered');
-                targetScale = hoverScale;
-                setTarget(e);
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateY = ((x - centerX) / centerX) * 8;  // max ±8deg
+                const rotateX = ((centerY - y) / centerY) * 8;  // max ±8deg
+                card.style.transition = 'none';
+                card.style.transform =
+                    `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
             });
-            card.addEventListener('mousemove', setTarget);
-            card.addEventListener('mouseleave', () => {
-                card.classList.remove('is-hovered');
-                targetX = 0;
-                targetY = 0;
-                targetScale = 1;
-            });
-        }
-
-        // Watch for cards becoming visible, then init tilt
-        const tiltObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Wait for fade-up animation to finish (0.7s), then init tilt
-                    setTimeout(() => initTilt(entry.target), 800);
-                    tiltObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.feature-card, .step-card').forEach(card => tiltObserver.observe(card));
+        });
     </script>
+
 </body>
 
 </html>

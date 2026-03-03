@@ -1,0 +1,8 @@
+AI TOOLS
+ANIMATION: https://www.make.com/en/product
+INTEGRATIONS:https://www.leadconnectorhq.com/
+
+CLONE A WEBSITE:
+-page source
+-ctrl A (selects all)
+-paste in .txt file

@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<!--
+  ════════════════════════════════════════════
+  SITE CONFIG — set these before client delivery
+  THEME:   dark | light   (default: dark)
+  CHECKER: dev  | off     (remove before launch)
+  ════════════════════════════════════════════
+-->
+<html lang="en" data-theme="dark" data-checker="dev"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SCHEDULE_META_TITLE]</title><meta name="description" content="[SCHEDULE_META_DESC]">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800|Space+Grotesk:400,500,600,700|Syne:400,500,600,700,800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* B2B LEAD-GEN TEMPLATE — SCHEDULE PAGE (v2 Tall Header) | See SETUP.md */
+:root{--color-body-bg:#0b121b;--color-header-bg:#0a0e17;--color-accent:#00c9b8;/* [ACCENT_COLOR] */--color-accent-h:#00e5d1;/* [ACCENT_HOVER] */--color-border:rgba(255,255,255,0.1);--color-text:#94a3b8;--color-white:#ffffff;--glass-border:rgba(255,255,255,0.1);--font-headline:'Syne',sans-serif;--font-content:'Inter',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}::selection{background:var(--color-accent);color:#fff}
+body{font-family:var(--font-content);background-color:var(--color-body-bg);color:var(--color-text);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--color-accent);text-decoration:none;transition:all 0.3s}
+/* HEADER — v2: tall logo-only, Omnia schedule style */
+/* RULE: padding + logo = height. NO fixed height + overflow:hidden */
+.site-header{background-color:var(--color-header-bg);border-bottom:1px solid var(--color-border);padding:0 20px;position:sticky;top:0;z-index:1000}
+.header-inner{max-width:1170px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:28px 5px}
+.header-logo-col{width:29.1%}
+/* LOGO SLOT: 72px → ~128px total header height */
+.header-logo{max-height:72px;width:auto;display:block;transform-origin:left center;transition:transform 0.3s ease,opacity 0.3s ease}.header-logo:hover{transform:scale(1.05);opacity:0.9}
+.section-inner{max-width:1170px;margin:0 auto;padding:0 20px}
+.main-section{padding:6rem 5% 60px;min-height:100vh;display:flex;align-items:flex-start}
+.bg-overlay{position:fixed;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,201,184,0.04) 0%,transparent 60%);pointer-events:none;z-index:0}
+.content-row{position:relative;z-index:1;display:flex;gap:60px;max-width:1200px;margin:0 auto;width:100%}
+.text-col{width:43.1%;min-width:0;display:flex;flex-direction:column;gap:32px}
+.back-link{display:inline-flex;align-items:center;gap:8px;color:var(--color-accent);font-family:var(--font-content);font-size:0.95rem;font-weight:500;margin-bottom:8px}.back-link:hover{opacity:0.8}.back-link i{font-size:0.85rem}
+.hero-headline{overflow-wrap:break-word;word-break:break-word;font-family:var(--font-headline);font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+.hero-headline .white{color:var(--color-white)}.hero-headline .accent{color:var(--color-accent)}
+.subtitle{color:var(--color-text);font-size:1.05rem;line-height:1.75}
+.benefit-list{list-style:none;padding:0;margin:0}
+.benefit-list li{display:flex;align-items:center;gap:12px;font-family:var(--font-content);color:var(--color-text);font-weight:400;font-size:1rem;line-height:1.6;padding-top:10px}
+.benefit-list li .b-icon{color:var(--color-accent);font-size:1rem;width:18px;text-align:center;flex-shrink:0}
+.scarcity-row{margin:40px 0 0}
+.scarcity-badge{display:flex;flex-direction:column;align-items:flex-start;padding:20px 40px;background:linear-gradient(90deg,#0c182d 0%,#072029 100%);border:1px solid rgba(0,191,175,0.1);border-radius:10px}
+.scarcity-badge h2{font-family:var(--font-headline);font-size:1.1rem;font-weight:700;color:var(--color-white);margin-bottom:6px}
+.scarcity-badge p{font-family:var(--font-content);font-size:0.9rem;color:var(--color-text)}
+.calendar-col{flex:1;display:flex;align-items:flex-start;justify-content:center}
+.calendar-placeholder{background:rgba(15,23,42,0.6);border:1px solid var(--color-border);border-radius:16px;padding:60px 40px;text-align:center;width:100%;display:flex;flex-direction:column;align-items:center;gap:20px}
+.calendar-placeholder i{font-size:3rem;color:var(--color-accent);opacity:0.4}
+.calendar-placeholder h3{font-family:var(--font-headline);font-size:1.3rem;font-weight:700;color:var(--color-white)}
+.calendar-placeholder p{color:var(--color-text);font-size:0.95rem;max-width:280px;line-height:1.6}
+.btn-book{display:inline-block;padding:16px 36px;background:var(--color-accent);color:var(--color-white);border-radius:50px;font-family:var(--font-content);font-size:1rem;font-weight:600;text-decoration:none;transition:all 0.3s ease;margin-top:8px}
+.btn-book:hover{background:var(--color-accent-h);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,201,184,0.3);color:var(--color-white)}
+.site-footer{border-top:1px solid var(--glass-border);padding:40px 0}.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.footer-left{display:flex;flex-direction:column;gap:10px}.footer-logo{height:60px;width:auto}
+.footer-tagline{color:#cccccc;font-family:var(--font-content);font-size:1rem}.footer-right{color:#cccccc;font-family:var(--font-content);font-size:0.9rem;text-align:right}
+.animate-left,.animate-right{opacity:0;transition:opacity 0.6s ease,transform 0.6s ease}
+.animate-left{transform:translateX(-30px)}.animate-right{transform:translateX(30px)}
+.animate-left.visible,.animate-right.visible{opacity:1;transform:none}
+@media(max-width:900px){.content-row{flex-direction:column}.text-col{width:100%}}
+@media(max-width:768px){.main-section{padding:4rem 5% 40px}.footer-inner{flex-direction:column;text-align:center;gap:20px}}
+
+/* LIGHT MODE */
+[data-theme="light"]{--color-body-bg:#f0f4f8;--color-header-bg:#ffffff;--color-border:rgba(0,0,0,0.08);--color-text:#475569;--color-white:#1e293b;--glass-border:rgba(0,0,0,0.08)}
+[data-theme="light"] .calendar-placeholder{background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.1)}
+[data-theme="light"] .scarcity-badge{background:linear-gradient(90deg,#e8f4fb 0%,#edfcfa 100%);border-color:rgba(0,191,175,0.2)}
+[data-theme="light"] .scarcity-badge h2,[data-theme="light"] .calendar-placeholder h3{color:#1e293b}
+[data-theme="light"] .footer-tagline,[data-theme="light"] .footer-right{color:#475569}</style></head><body>
+
+<!-- v2 Header: logo only, tall Omnia-style. No nav button on schedule pages. -->
+<header class="site-header"><div class="header-inner">
+  <div class="header-logo-col">
+    <!-- TOKEN: logo file and brand name -->
+    <a href="index.html"><img src="assets/logo/[LOGO_PATH]" alt="[BRAND_NAME]" class="header-logo"></a>
+  </div>
+</div></header>
+
+<section class="main-section">
+  <div class="bg-overlay"></div>
+  <div class="content-row">
+
+    <!-- LEFT COLUMN (43.1%) -->
+    <div class="text-col animate-left">
+      <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i>Back to Home</a>
+
+      <h1 class="hero-headline"><strong>
+        <!-- TOKEN: two-part schedule headline -->
+        <span class="white">[SCHEDULE_H1_WHITE] </span>
+        <span class="accent">[SCHEDULE_H1_ACCENT]</span>
+      </strong></h1>
+
+      <!-- TOKEN: schedule page subtitle paragraph -->
+      <p class="subtitle"><span>[SCHEDULE_SUBTITLE]</span></p>
+
+      <ul class="benefit-list">
+        <!-- TOKEN: 5 benefit bullets — fa icon class + text -->
+        <li><i class="fas [BENEFIT_1_ICON] b-icon"></i>[BENEFIT_1_TEXT]</li>
+        <li><i class="fas [BENEFIT_2_ICON] b-icon"></i>[BENEFIT_2_TEXT]</li>
+        <li><i class="fas [BENEFIT_3_ICON] b-icon"></i>[BENEFIT_3_TEXT]</li>
+        <li><i class="fas [BENEFIT_4_ICON] b-icon"></i>[BENEFIT_4_TEXT]</li>
+        <li><i class="fas [BENEFIT_5_ICON] b-icon"></i>[BENEFIT_5_TEXT]</li>
+      </ul>
+
+      <div class="scarcity-row"><div class="scarcity-badge">
+        <!-- TOKEN: scarcity heading + body -->
+        <h2>[SCARCITY_TITLE]</h2><p>[SCARCITY_BODY]</p>
+      </div></div>
+    </div>
+
+    <!-- RIGHT COLUMN — Calendar Embed (56.9%) -->
+    <div class="calendar-col animate-right">
+      <!--
+      ════════════════════════════════════════════════
+      CALENDAR EMBED — Replace this placeholder block
+
+      Calendly:
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/YOUR-LINK"
+             style="min-width:320px;height:700px;"></div>
+        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+      Cal.com:
+        <cal-inline calLink="username/meeting-type"></cal-inline>
+        <script src="https://cal.com/embed.js" defer></script>
+
+      HubSpot:
+        <div class="meetings-iframe-container"
+             data-src="https://meetings.hubspot.com/YOUR-LINK?embed=true"></div>
+        <script src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
+      ════════════════════════════════════════════════
+      -->
+      <div class="calendar-placeholder">
+        <i class="fas fa-calendar-alt"></i>
+        <!-- TOKEN: calendar card heading and body -->
+        <h3>[BRAND_NAME] [SCHEDULE_MEETING_TYPE]</h3>
+        <p>[SCHEDULE_CALENDAR_BODY]</p>
+        <a href="#" class="btn-book">Schedule Meeting &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer"><div class="section-inner"><div class="footer-inner">
+  <div class="footer-left">
+    <a href="index.html"><img src="assets/logo/[LOGO_PATH]" alt="[BRAND_NAME]" class="footer-logo"></a>
+    <span class="footer-tagline">[BRAND_TAGLINE]</span>
+  </div>
+  <div class="footer-right">&copy; [YEAR] [BRAND_NAME]. All rights reserved.</div>
+</div></div></footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.animate-left,.animate-right').forEach(e=>obs.observe(e));
+
+(function(){
+  if(document.documentElement.dataset.checker!=='dev')return;
+  function hexToRgb(h){h=h.replace(/[^0-9a-f]/gi,'').replace(/^([0-9a-f]{3})$/i,'$1$1$1');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
+  function lum(r,g,b){return[r,g,b].reduce((a,c,i)=>{c/=255;c=c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);return a+c*[0.2126,0.7152,0.0722][i]},0)}
+  function ratio(h1,h2){const l1=lum(...hexToRgb(h1)),l2=lum(...hexToRgb(h2));return((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05)).toFixed(2)}
+  function hexToHsl(h){let[r,g,b]=hexToRgb(h).map(x=>x/255);const max=Math.max(r,g,b),min=Math.min(r,g,b);let l=(max+min)/2,s=0;if(max!==min){s=l>0.5?(max-min)/(2-max-min):(max-min)/(max+min)}return{s:Math.round(s*100),l:Math.round(l*100)}}
+  const style=`#cc{position:fixed;bottom:16px;left:16px;z-index:99998;background:rgba(10,14,23,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px 16px;font-family:monospace;font-size:12px;line-height:1.8;color:#94a3b8;min-width:200px;backdrop-filter:blur(10px)}.cp{color:#00c9b8}.cf{color:#f87171}.cw{color:#fbbf24}`;
+  const ss=document.createElement('style');ss.textContent=style;document.head.appendChild(ss);
+  const el=document.createElement('div');el.id='cc';document.body.appendChild(el);
+  function update(){
+    const s=getComputedStyle(document.documentElement);
+    const accent=(s.getPropertyValue('--color-accent')||'#00c9b8').trim().replace(/[^0-9a-f]/gi,'').slice(0,6);
+    const bg=(s.getPropertyValue('--color-body-bg')||'#0b121b').trim().replace(/[^0-9a-f]/gi,'').slice(0,6);
+    const r=ratio(accent,bg);const hsl=hexToHsl(accent);
+    const rP=parseFloat(r)>=4.5,lP=hsl.l>=40,sP=hsl.s>=60;
+    el.innerHTML=`<b style="color:#fff">Contrast Checker</b><br>Accent: <b style="color:#fff">#${accent}</b><br>Ratio: <b class="${rP?'cp':'cf'}">${r}:1 ${rP?'✅':'❌'}</b><br>Lightness: <b class="${lP?'cp':'cw'}">${hsl.l}% ${lP?'✅':'⚠️'}</b><br>Saturation: <b class="${sP?'cp':'cf'}">${hsl.s}% ${sP?'✅':'❌'}</b>`;
+  }
+  update();
+  new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();</script></body></html>

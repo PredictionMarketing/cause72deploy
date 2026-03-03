@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<!--
+  ════════════════════════════════════════════
+  SITE CONFIG — set these before client delivery
+  THEME:   dark | light   (default: dark)
+  CHECKER: dev  | off     (remove before launch)
+  ════════════════════════════════════════════
+-->
+<html lang="en" data-theme="dark" data-checker="dev"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[META_TITLE]</title><meta name="description" content="[META_DESC]"><meta property="og:title" content="[OG_TITLE]"><meta property="og:description" content="[META_DESC]"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* B2B LEAD-GEN TEMPLATE v1 | See SETUP.md to customize */
+:root{--bg-body:#0b121bff;--bg-header:#0a0e17ff;--accent:#00c9b8ff;/* [ACCENT_COLOR] change this */--accent-hover:#00e5d1;/* [ACCENT_HOVER] */--text-color:#94a3b8ff;--white:#ffffff;--transparent:transparent;--glass-bg:rgba(15,23,42,0.6);--glass-bg-hover:rgba(15,23,42,0.8);--glass-border:rgba(255,255,255,0.1);--glass-border-hover:rgba(0,191,175,0.3);--video-bg:#0d2633ff;--video-border:rgba(0,191,175,0.2);--headlinefont:'Syne',sans-serif;--contentfont:'Inter',system-ui,sans-serif;--spacefont:'Space Grotesk',sans-serif;--link-color:var(--accent)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}::selection{background:#00c4b3;color:#fff}html{scroll-behavior:smooth}
+body{font-family:var(--contentfont);background-color:var(--bg-body);color:var(--text-color);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--link-color);text-decoration:none;transition:all 0.3s}
+#scroll-progress-bar{position:fixed;top:0;left:0;width:0%;height:4px;background-color:var(--accent);z-index:99999;transition:width 0.1s linear}
+.section-inner{max-width:1170px;margin:0 auto;padding:0 20px}
+.site-header{background-color:var(--bg-header);border-bottom:1px solid var(--glass-border);padding:0 20px;position:sticky;top:0;z-index:1000}
+.tilt-hover{transform:perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);transform-style:preserve-3d;will-change:transform;transition:box-shadow 0.3s ease,border-color 0.3s ease;background:rgba(15,23,42,0.8)!important}
+.tilt-hover.is-hovered{box-shadow:rgba(0,191,175,0.2) 0px 16px 64px;border-color:rgba(0,191,175,0.5)}
+.tilt-hover .rotate-icon{transform:rotate(0deg);transition:transform 0.3s ease;will-change:transform}.tilt-hover:hover .rotate-icon{transform:rotate(11deg)}
+.step-card.tilt-hover{transition:box-shadow 0.3s ease,border-color 0.3s ease}.step-card.tilt-hover:hover{background:rgba(15,23,42,0.8)!important}
+.header-inner{max-width:1170px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 5px}
+.header-logo-col{width:29.1%}.header-logo{max-height:40px;width:auto;display:block;transform-origin:left center;transition:transform 0.3s ease,opacity 0.3s ease}.header-logo:hover{transform:scale(1.05);opacity:0.9}
+.header-cta-col{width:70.9%;text-align:right}
+.cta-btn-nav{font-family:var(--contentfont);background-color:var(--accent);color:var(--white);padding:20px 32px;border:1px solid var(--transparent);border-radius:50px;font-size:18px;font-weight:500;cursor:pointer;transition:all 0.3s ease;display:inline-block;text-decoration:none}.cta-btn-nav:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,191,175,0.3);color:var(--white)}
+.hero-section{padding:80px 0 60px;position:relative;min-height:580px;overflow:hidden;display:flex;align-items:center}
+.hero-bg-elements{position:absolute;inset:0;z-index:0}.gradient-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,201,184,0.08) 0%,transparent 70%);top:-200px;right:-100px}
+.orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(91,184,247,0.06) 0%,transparent 70%);bottom:-100px;left:-50px}
+.orb-3{width:300px;height:300px;background:radial-gradient(circle,rgba(0,201,184,0.04) 0%,transparent 70%);top:50%;left:40%}
+.hero-row{display:flex;align-items:flex-start;gap:60px;position:relative;z-index:1}.hero-left{width:40%;padding-top:40px}.hero-left,.hero-right{min-width:0}
+.hero-headline{overflow-wrap:break-word;word-break:break-word;font-family:var(--headlinefont);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:28px}
+.hero-headline .white{color:var(--white)}.hero-headline .accent{color:var(--accent)}
+.hero-subtext{color:var(--text-color);font-size:1.15rem;line-height:1.75;max-width:440px}
+.hero-right{flex:1;display:flex;flex-direction:column;align-items:center;gap:28px}
+.video-frame{width:100%;border:1px solid var(--video-border);border-radius:16px;overflow:hidden;background:var(--video-bg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.video-placeholder{width:60px;height:60px;border-radius:50%;background:rgba(0,201,184,0.15);border:2px solid rgba(0,201,184,0.4);display:flex;align-items:center;justify-content:center}
+.video-placeholder::after{content:'';border-left:20px solid var(--accent);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.hero-cta-btn{display:inline-block;padding:18px 44px;background:var(--accent);color:var(--white);font-family:var(--contentfont);font-size:1.1rem;font-weight:700;border-radius:50px;border:none;cursor:pointer;transition:all 0.3s ease;text-decoration:none;letter-spacing:0.01em}
+.hero-cta-btn:hover{background:var(--accent-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,201,184,0.3);color:var(--white)}
+.hero-limited{font-family:var(--contentfont);color:var(--text-color);font-style:italic;font-size:0.9rem}
+.scroll-indicator{position:absolute;bottom:28px;left:60px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-color);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent)}
+.value-section{padding:80px 0}.value-section-header{text-align:center;margin-bottom:56px}
+.value-section-header h2{font-family:var(--headlinefont);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.25}
+.value-section-header h2 .white{color:var(--white)}.value-section-header h2 .accent{color:var(--accent)}
+.value-cards-row{display:flex;gap:28px;align-items:stretch}
+.glass-card{flex:1;background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;transition:border-color 0.3s ease,box-shadow 0.3s ease}
+.glass-card:hover{border-color:var(--glass-border-hover);box-shadow:0 8px 40px rgba(0,191,175,0.1)}
+.value-icon{width:52px;height:52px;background:linear-gradient(135deg,#00BFAF 0%,#00E5D1 100%);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:white;flex-shrink:0}
+.glass-card h3{font-family:var(--headlinefont);font-size:1.25rem;font-weight:700;color:var(--white)}.glass-card p{font-family:var(--contentfont);color:var(--text-color);font-size:0.95rem;line-height:1.7}
+.process-header-section{padding:40px 0 0}.process-header-inner{text-align:center;padding:60px 0 40px;border-top:1px solid var(--glass-border)}
+.process-header-inner h2{font-family:var(--headlinefont);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700}
+.process-header-inner h2 .accent{color:var(--accent)}.process-header-inner h2 .white{color:var(--white)}
+.process-header-inner .subtitle{margin-top:16px;color:var(--text-color);font-size:1.05rem}
+.steps-section{padding:0 0 80px}.step-row{position:relative;padding-bottom:40px;padding-left:80px}
+.step-row::after{content:'';position:absolute;left:26px;top:80px;bottom:-20px;width:2px;background:linear-gradient(to bottom,var(--accent),transparent)}
+.step-row:last-child::after{display:none}
+.step-row::before{content:attr(data-step);position:absolute;left:0;top:24px;width:52px;height:52px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-family:var(--headlinefont);font-size:0.85rem;font-weight:700;color:var(--accent);letter-spacing:0.05em}
+.step-card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;padding:36px 40px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.3s ease,box-shadow 0.3s ease}
+.step-icon{width:52px;height:52px;background:linear-gradient(135deg,#00BFAF 0%,#00E5D1 100%);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:white}
+.step-card h3{font-family:var(--headlinefont);font-size:1.25rem;font-weight:700;color:var(--white)}.step-card p{font-family:var(--contentfont);color:var(--text-color);font-size:0.95rem;line-height:1.7}
+.partnerships-section{padding:80px 0}.partnerships-header{text-align:center;margin-bottom:56px}
+.partnerships-header h2{font-family:var(--headlinefont);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700}
+.partnerships-header h2 .white{color:var(--white)}.partnerships-header h2 .accent{color:var(--accent)}
+.partnerships-header .subtitle{margin-top:16px;color:var(--text-color);font-size:1.05rem;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.7}
+.partnership-cards-row{display:flex;gap:28px;align-items:stretch}
+.partnership-card{flex:1;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.3s ease,box-shadow 0.3s ease}
+.partnership-card:hover{border-color:var(--glass-border-hover);box-shadow:0 8px 40px rgba(0,191,175,0.1)}
+.partnership-icon{width:52px;height:52px;background:linear-gradient(135deg,#00BFAF 0%,#00E5D1 100%);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:white}
+.partnership-card h3{font-family:var(--headlinefont);font-size:1.15rem;font-weight:700;color:var(--white)}.partnership-card p{font-family:var(--contentfont);color:var(--text-color);font-size:0.95rem;line-height:1.7}
+.trust-section{padding:60px 0}
+.trust-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;max-width:700px;margin:0 auto;padding:52px 48px;background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;transition:border-color 0.3s ease,box-shadow 0.3s ease}
+.trust-shield-icon{width:56px;height:56px;background:linear-gradient(135deg,#00BFAF 0%,#00E5D1 100%);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:white;animation:shield-pulse 3s ease-in-out infinite;flex-shrink:0}
+@keyframes shield-pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,191,175,0.4),0 0 20px rgba(0,191,175,0.15)}50%{box-shadow:0 0 0 8px rgba(0,191,175,0),0 0 40px rgba(0,191,175,0.3)}}
+.trust-inner .quote{font-family:var(--contentfont);color:var(--text-color);font-style:italic;font-size:1.05rem;line-height:1.7}
+.trust-inner h2{font-family:var(--headlinefont);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.3}
+.trust-inner h2 .white{color:var(--white)}.trust-inner h2 .accent{color:var(--accent)}
+.final-cta-section{padding:100px 0;position:relative;overflow:hidden}
+.final-cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,201,184,0.08) 0%,transparent 70%);pointer-events:none}
+.final-cta-inner{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px}
+.final-cta-inner h2{font-family:var(--headlinefont);font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15}
+.final-cta-inner h2 .white{color:var(--white)}.final-cta-inner h2 .accent{color:var(--accent)}
+.cta-subtitle{color:var(--text-color);font-size:1.05rem;max-width:480px;line-height:1.7}
+.final-cta-btn{display:inline-block;padding:20px 52px;background:var(--accent);color:var(--white);font-family:var(--contentfont);font-size:1.1rem;font-weight:700;border-radius:50px;text-decoration:none;transition:all 0.3s ease;letter-spacing:0.01em}
+.final-cta-btn:hover{background:var(--accent-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,201,184,0.35);color:var(--white)}
+.cta-bullets{display:flex;gap:32px;list-style:none;padding:0}.cta-bullets li{font-family:var(--contentfont);color:var(--text-color);font-size:0.9rem;display:flex;align-items:center;gap:8px}
+.cta-bullets li::before{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;color:var(--accent);margin-right:8px}
+.site-footer{border-top:1px solid var(--glass-border);padding:40px 0}.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.footer-left{display:flex;flex-direction:column;gap:10px}.footer-logo{height:60px;width:auto}
+.footer-tagline{color:#cccccc;font-family:var(--contentfont);font-size:1rem}.footer-right{color:#cccccc;font-family:var(--contentfont);font-size:0.9rem;text-align:right}
+.animate-up,.animate-left,.animate-right{opacity:0;transition:opacity 0.6s ease,transform 0.6s ease}
+.animate-up{transform:translateY(30px)}.animate-left{transform:translateX(-30px)}.animate-right{transform:translateX(30px)}
+.animate-up.visible,.animate-left.visible,.animate-right.visible{opacity:1;transform:none}
+@media(max-width:900px){.hero-row{flex-direction:column;gap:40px}.hero-left{width:100%;padding-top:0}.value-cards-row,.partnership-cards-row{flex-direction:column}.step-row{padding-left:0;padding-top:60px}.step-row::before{top:-40px;left:50%;transform:translateX(-50%)}.step-row::after{display:none!important}.cta-bullets{flex-direction:column;gap:10px;align-items:center}.footer-inner{flex-direction:column;text-align:center;gap:20px}}
+@media(max-width:768px){.desktop-only{display:none!important}}
+
+/* ═══════════════════════════════════════════════════
+   LIGHT MODE — activated by data-theme="light" on <html>
+   Config block at top of file controls the default.
+   ═══════════════════════════════════════════════════ */
+[data-theme="light"]{
+  --bg-body:#f0f4f8;--bg-header:#ffffff;
+  --glass-bg:rgba(255,255,255,0.75);--glass-bg-hover:rgba(255,255,255,0.92);
+  --glass-border:rgba(0,0,0,0.08);--glass-border-hover:rgba(0,0,0,0.18);
+  --video-bg:#e2edf5;--video-border:rgba(0,0,0,0.12);
+  --text-color:#475569;--white:#1e293b;
+}
+/* Light mode: tilt cards need dark bg override */
+[data-theme="light"] .tilt-hover{background:rgba(255,255,255,0.9)!important}
+[data-theme="light"] .step-card.tilt-hover:hover{background:rgba(255,255,255,0.95)!important}
+/* Light mode: boost glow opacity so effects stay visible */
+[data-theme="light"] .trust-shield-icon{animation:shield-pulse-light 3s ease-in-out infinite}
+@keyframes shield-pulse-light{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,191,175,0.6),0 0 20px rgba(0,191,175,0.3)}
+  50%{box-shadow:0 0 0 8px rgba(0,191,175,0),0 0 40px rgba(0,191,175,0.5)}
+}
+[data-theme="light"] .glass-card:hover{box-shadow:0 8px 40px rgba(0,0,0,0.12)}
+[data-theme="light"] .footer-tagline,[data-theme="light"] .footer-right{color:#475569}
+
+/* ═══════════════════════════════════════════════════
+   CONTRAST CHECKER WIDGET
+   Shown only when data-checker="dev" on <html>.
+   Remove that attribute before client delivery.
+   ═══════════════════════════════════════════════════ */
+#contrast-checker{position:fixed;bottom:16px;left:16px;z-index:99998;background:rgba(10,14,23,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px 16px;font-family:monospace;font-size:12px;line-height:1.8;color:#94a3b8;min-width:200px;backdrop-filter:blur(10px)}
+#contrast-checker b{color:#ffffff}
+#contrast-checker .pass{color:#00c9b8}
+#contrast-checker .fail{color:#f87171}
+#contrast-checker .warn{color:#fbbf24}</style></head><body><div id="scroll-progress-bar"></div>
+<header class="site-header"><div class="header-inner">
+  <div class="header-logo-col"><!-- TOKEN: logo --><a href="/"><img src="assets/logo/[LOGO_PATH]" alt="[BRAND_NAME]" class="header-logo"></a></div>
+  <div class="header-cta-col desktop-only"><!-- TOKEN: nav CTA --><a href="schedule-call" class="cta-btn-nav">[NAV_CTA_LABEL]</a></div>
+</div></header>
+
+<section class="hero-section">
+  <div class="hero-bg-elements"><div class="gradient-orb orb-1"></div><div class="gradient-orb orb-2"></div><div class="gradient-orb orb-3"></div></div>
+  <div class="section-inner"><div class="hero-row">
+    <div class="hero-left animate-left">
+      <h1 class="hero-headline"><strong><span class="white">[HERO_H1_WHITE] </span><span class="accent">[HERO_H1_ACCENT]</span></strong></h1>
+      <p class="hero-subtext">[HERO_SUBTEXT]</p>
+    </div>
+    <div class="hero-right animate-right">
+      <!-- TOKEN: replace with real video embed when ready -->
+      <div class="video-frame"><div class="video-placeholder"></div></div>
+      <div class="hero-cta-wrapper"><a href="schedule-call" class="hero-cta-btn">[NAV_CTA_LABEL]</a></div>
+      <p class="hero-limited">[HERO_SCARCITY_LINE]</p>
+      <div class="scroll-indicator desktop-only"><div class="scroll-line"></div>Scroll to explore</div>
+    </div>
+  </div></div>
+</section>
+
+<section class="value-section"><div class="section-inner">
+  <div class="value-section-header animate-up">
+    <h2><span class="white">[VALUES_H2_WHITE]</span><br><span class="accent">[VALUES_H2_ACCENT]</span></h2>
+  </div>
+  <div class="value-cards-row">
+    <div class="glass-card animate-up"><div class="value-icon"><i class="fas [VALUE_CARD_1_ICON]"></i></div><h3>[VALUE_CARD_1_TITLE]</h3><p>[VALUE_CARD_1_BODY]</p></div>
+    <div class="glass-card animate-up"><div class="value-icon"><i class="fas [VALUE_CARD_2_ICON]"></i></div><h3>[VALUE_CARD_2_TITLE]</h3><p>[VALUE_CARD_2_BODY]</p></div>
+    <div class="glass-card animate-up"><div class="value-icon"><i class="fas [VALUE_CARD_3_ICON]"></i></div><h3>[VALUE_CARD_3_TITLE]</h3><p>[VALUE_CARD_3_BODY]</p></div>
+  </div>
+</div></section>
+
+<section class="process-header-section"><div class="section-inner">
+  <div class="process-header-inner animate-up">
+    <h2><span class="accent">[PROCESS_H2_ACCENT]</span><span class="white"> [PROCESS_H2_WHITE]</span></h2>
+    <p class="subtitle">[PROCESS_SUBTITLE]</p>
+  </div>
+</div></section>
+
+<section class="steps-section"><div class="section-inner">
+  <div class="step-row animate-left" data-step="01"><div class="step-card tilt-hover"><div class="step-icon"><i class="fas [STEP_1_ICON]"></i></div><h3>[STEP_1_TITLE]</h3><p>[STEP_1_BODY]</p></div></div>
+  <div class="step-row animate-left" data-step="02"><div class="step-card tilt-hover"><div class="step-icon"><i class="fas [STEP_2_ICON]"></i></div><h3>[STEP_2_TITLE]</h3><p>[STEP_2_BODY]</p></div></div>
+  <div class="step-row animate-left" data-step="03"><div class="step-card tilt-hover"><div class="step-icon"><i class="fas [STEP_3_ICON]"></i></div><h3>[STEP_3_TITLE]</h3><p>[STEP_3_BODY]</p></div></div>
+</div></section>
+
+<section class="partnerships-section"><div class="section-inner">
+  <div class="partnerships-header animate-up">
+    <h2><span class="white">[PARTNERS_H2_WHITE]</span><span class="accent"> [PARTNERS_H2_ACCENT]</span></h2>
+    <p class="subtitle">[PARTNERS_SUBTITLE]</p>
+  </div>
+  <div class="partnership-cards-row">
+    <div class="partnership-card animate-up"><div class="partnership-icon"><div class="rotate-icon"><i class="fas [PARTNER_CARD_1_ICON]"></i></div></div><h3>[PARTNER_CARD_1_TITLE]</h3><p>[PARTNER_CARD_1_BODY]</p></div>
+    <div class="partnership-card animate-up"><div class="partnership-icon"><div class="rotate-icon"><i class="fas [PARTNER_CARD_2_ICON]"></i></div></div><h3>[PARTNER_CARD_2_TITLE]</h3><p>[PARTNER_CARD_2_BODY]</p></div>
+    <div class="partnership-card animate-up"><div class="partnership-icon"><div class="rotate-icon"><i class="fas [PARTNER_CARD_3_ICON]"></i></div></div><h3>[PARTNER_CARD_3_TITLE]</h3><p>[PARTNER_CARD_3_BODY]</p></div>
+  </div>
+</div></section>
+
+<section class="trust-section"><div class="section-inner">
+  <div class="trust-inner tilt-hover animate-up">
+    <div class="trust-shield-icon"><i class="fas fa-shield-alt"></i></div>
+    <p class="quote">"[TRUST_QUOTE]"</p>
+    <h2><span class="white">[TRUST_H2_WHITE] </span><span class="accent">[TRUST_H2_ACCENT]</span><span class="white"> [TRUST_H2_WHITE_2] </span><span class="accent">[TRUST_H2_ACCENT_2]</span><span class="white">.</span></h2>
+  </div>
+</div></section>
+
+<section class="final-cta-section"><div class="final-cta-bg"></div><div class="section-inner">
+  <div class="final-cta-inner animate-up">
+    <h2><span class="white">[FINAL_CTA_H2_WHITE] </span><span class="accent">[FINAL_CTA_H2_ACCENT]</span><span class="white">?</span></h2>
+    <p class="cta-subtitle">[FINAL_CTA_SUBTITLE]</p>
+    <a href="schedule-call" class="final-cta-btn">[NAV_CTA_LABEL]</a>
+    <ul class="cta-bullets"><li>[CTA_BULLET_1]</li><li>[CTA_BULLET_2]</li><li>[CTA_BULLET_3]</li></ul>
+  </div>
+</div></section>
+
+<footer class="site-footer"><div class="section-inner"><div class="footer-inner">
+  <div class="footer-left"><a href="/"><img src="assets/logo/[LOGO_PATH]" alt="[BRAND_NAME]" class="footer-logo"></a><span class="footer-tagline">[BRAND_TAGLINE]</span></div>
+  <div class="footer-right">&copy; [YEAR] [BRAND_NAME]. All rights reserved.</div>
+</div></div></footer>
+
+<script>
+window.addEventListener('scroll',()=>{const t=document.documentElement.scrollTop||document.body.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;document.getElementById('scroll-progress-bar').style.width=(t/h*100)+'%'});
+const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.animate-up,.animate-left,.animate-right').forEach(e=>obs.observe(e));
+document.querySelectorAll('.tilt-hover').forEach(c=>{
+  c.addEventListener('mouseenter',()=>c.classList.add('is-hovered'));
+  c.addEventListener('mouseleave',()=>{c.classList.remove('is-hovered');c.style.transition='transform 0.5s ease,box-shadow 0.3s ease,border-color 0.3s ease';c.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';setTimeout(()=>{c.style.transition='box-shadow 0.3s ease,border-color 0.3s ease'},500)});
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),rY=((e.clientX-r.left-r.width/2)/(r.width/2))*8,rX=((r.height/2-(e.clientY-r.top))/(r.height/2))*8;c.style.transition='none';c.style.transform=`perspective(1000px) rotateX(${rX}deg) rotateY(${rY}deg) scale(1.02)`});
+});
+
+// ── Contrast Checker Widget ──────────────────────────────────
+(function(){
+  if(document.documentElement.dataset.checker !== 'dev') return;
+  function hexToRgb(h){h=h.replace(/[^0-9a-f]/gi,'').replace(/^([0-9a-f])([0-9a-f])([0-9a-f])$/i,'$1$1$2$2$3$3');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
+  function lum(r,g,b){return[r,g,b].reduce((a,c,i)=>{c/=255;c=c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);return a+c*[0.2126,0.7152,0.0722][i]},0)}
+  function ratio(h1,h2){const l1=lum(...hexToRgb(h1)),l2=lum(...hexToRgb(h2));return((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05)).toFixed(2)}
+  function hexToHsl(h){let[r,g,b]=hexToRgb(h).map(x=>x/255);const max=Math.max(r,g,b),min=Math.min(r,g,b);let l=(max+min)/2,s=0,hh=0;if(max!==min){s=l>0.5?(max-min)/(2-max-min):(max-min)/(max+min);if(max===r)hh=((g-b)/(max-min)+6)%6;else if(max===g)hh=(b-r)/(max-min)+2;else hh=(r-g)/(max-min)+4;hh/=6}return{h:Math.round(hh*360),s:Math.round(s*100),l:Math.round(l*100)}}
+  const el=document.createElement('div');el.id='contrast-checker';document.body.appendChild(el);
+  function update(){
+    const s=getComputedStyle(document.documentElement);
+    const accent=(s.getPropertyValue('--accent')||'#00c9b8').trim().replace(/ff$/,'');
+    const bg=(s.getPropertyValue('--bg-body')||'#0b121b').trim().replace(/ff$/,'');
+    const r=ratio(accent,bg);
+    const hsl=hexToHsl(accent);
+    const rPass=parseFloat(r)>=4.5;
+    const lPass=hsl.l>=40;
+    const sPass=hsl.s>=60;
+    el.innerHTML=`<b>Contrast Checker</b><br>
+Accent: <b>${accent}</b><br>
+Ratio vs bg: <b class="${rPass?'pass':'fail'}">${r}:1 ${rPass?'✅':'❌'}</b><br>
+Lightness: <b class="${lPass?'pass':'warn'}">${hsl.l}% ${lPass?'✅':'⚠️'}</b><br>
+Saturation: <b class="${sPass?'pass':'fail'}">${hsl.s}% ${sPass?'✅':'❌'}</b>`;
+  }
+  update();
+  // Re-check when theme toggles
+  new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();</script></body></html>

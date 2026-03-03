@@ -1,0 +1,612 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><<link rel="icon" type="image/png" href="assets/favicon/favicon-32.png" sizes="32x32"><link rel="icon" type="image/png" href="assets/favicon/favicon-16.png" sizes="16x16"><link rel="apple-touch-icon" href="assets/favicon/favicon-180.png">
+    <title>Schedule a Call — Cause72</title>
+    <meta name="description"
+        content="Schedule your qualification call with Cause72 to discuss how our intelligence platform delivers pre-qualified personal injury leads to your firm.">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800%7CSpace+Grotesk:400,500,600,700%7CSyne:400,500,600,700,800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ═══════════════════════════════════════════════════════
+           Cause72 Schedule Call — Pixel-Perfect Omnia Clone
+           Source: omniaintel.com/schedule-call (exact tokens)
+           ═══════════════════════════════════════════════════════ */
+
+        :root {
+            /* Exact Omnia color tokens */
+            --color-body-bg: #0b121b;
+            --color-header-bg: #0a0e17;
+            --color-accent: #1A6FD4;
+            --color-accent-hover: #1A6FD4;
+            --color-border: rgba(255, 255, 255, 0.1);
+            --color-badge-bg-start: #0c182d;
+            --color-badge-bg-end: #072029;
+            --color-badge-border: rgba(0, 191, 175, 0.1);
+            --color-text: #94a3b8;
+            --color-text-light: rgb(204, 204, 204);
+            --color-white: #ffffff;
+            --color-selection: #1A6FD4;
+
+            /* Fonts */
+            --font-headline: 'Syne', sans-serif;
+            --font-content: 'Inter', sans-serif;
+            --font-mono: 'Space Grotesk', sans-serif;
+        }
+
+        ::selection {
+            background: var(--color-selection);
+            color: var(--color-white);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-content);
+            background-color: var(--color-body-bg);
+            color: var(--color-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ─── Header ─────────────────────────────────────── */
+        /* LAYOUT RULE: padding controls height, never use height+overflow:hidden (clips content).
+           padding(12px) + logo(max 40px) + padding(12px) = ~64px naturally. */
+        .site-header {
+            background-color: var(--color-header-bg);
+            border-bottom: 1px solid var(--color-border);
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* V2: Logo-only header — sized to match Omnia's tall schedule page header */
+        .header-inner {
+            max-width: 1170px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 5px;
+        }
+
+        .header-logo-col {
+            width: 29.1%;
+        }
+
+        .header-logo {
+            max-height: 72px;
+            width: auto;
+            display: block;
+            transform-origin: left center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* Universal content constraint — identical to homepage */
+        .section-inner {
+            max-width: 1170px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-cta-col {
+            width: 70.9%;
+            text-align: right;
+        }
+
+        /* Identical to homepage — this button's height naturally drives the header height */
+        .cta-btn-nav {
+            font-family: var(--font-content);
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            padding: 20px 32px;
+            border: 1px solid transparent;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta-btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(0, 201, 184, 0.3);
+            color: var(--color-white);
+        }
+
+        .main-section {
+            padding: 6rem 5% 60px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+
+        /* Background image overlay — matches Omnia's subtle dark texture */
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 1;
+            background: radial-gradient(ellipse at 70% 30%, rgba(0, 201, 184, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 70%, rgba(91, 184, 247, 0.02) 0%, transparent 60%);
+        }
+
+        .content-row {
+            max-width: 1170px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── Left Column (Text) — 43.1% ────────────────── */
+        .text-col {
+            width: 43.1%;
+            padding: 0 60px 10px 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-accent-hover);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            font-family: var(--font-content);
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            gap: 1rem;
+        }
+
+        .back-link i {
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover i {
+            transform: translateX(-4px);
+        }
+
+        /* Headline */
+        .hero-headline {
+            letter-spacing: -0.02em;
+            font-size: clamp(1.85rem, 4vw, 2.6rem);
+            font-weight: 600;
+            line-height: 1.2em;
+            font-family: var(--font-headline);
+            padding: 0 40px 0 0;
+            margin: 20px 0 0;
+            text-align: left;
+        }
+
+        .hero-headline .white {
+            color: var(--color-white);
+        }
+
+        .hero-headline .accent {
+            color: var(--color-accent);
+        }
+
+        /* Subtitle paragraph */
+        .subtitle {
+            font-family: var(--font-content);
+            color: var(--color-text);
+            font-weight: 400;
+            padding: 10px 0;
+            line-height: 1.3em;
+            font-size: 1.25rem;
+            margin: 0 0 20px;
+        }
+
+        .subtitle span {
+            color: var(--color-text-light);
+        }
+
+        /* Bullet list — FA icons inline with text */
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .benefit-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-content);
+            color: var(--color-text);
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.6;
+            padding-top: 10px;
+        }
+
+        .benefit-list li .b-icon {
+            color: var(--color-accent);
+            font-size: 1rem;
+            width: 18px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* Scarcity badge — gradient from source */
+        .scarcity-row {
+            margin: 40px 0 0;
+        }
+
+        .scarcity-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px 40px;
+            background: linear-gradient(90deg, var(--color-badge-bg-start) 0%, var(--color-badge-bg-end) 100%);
+            border: 1px solid var(--color-badge-border);
+            border-radius: 10px;
+        }
+
+        .scarcity-badge h2 {
+            font-family: var(--font-headline);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-white);
+            line-height: 1rem;
+            padding: 10px 0 0;
+        }
+
+        .scarcity-badge p {
+            font-family: var(--font-content);
+            font-weight: 400;
+            font-size: 16px;
+            color: var(--color-text);
+            line-height: 1.3em;
+            padding: 10px 0;
+        }
+
+        /* ─── Right Column (Calendar) — 56.8% ────────────── */
+        .calendar-col {
+            width: 56.8%;
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 191, 175, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            transition: all 0.3s ease;
+            min-height: 580px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Calendar placeholder */
+        .calendar-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .calendar-placeholder .cal-icon {
+            font-size: 3rem;
+            color: var(--color-accent);
+            opacity: 0.5;
+        }
+
+        .calendar-placeholder h3 {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .calendar-placeholder .cal-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: var(--color-text);
+            font-size: 0.9rem;
+        }
+
+        .calendar-placeholder .cal-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .calendar-placeholder p {
+            color: var(--color-text);
+            font-size: 0.95rem;
+            max-width: 340px;
+            line-height: 1.5;
+        }
+
+        .calendar-placeholder .btn-book {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2.25rem;
+            background: var(--color-accent);
+            color: var(--color-body-bg);
+            border: none;
+            border-radius: 999px;
+            font-family: var(--font-content);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .calendar-placeholder .btn-book:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 201, 184, 0.25);
+        }
+
+        /* If using Calendly inline embed */
+        .calendly-inline-widget {
+            min-width: 320px;
+            width: 100%;
+            height: 560px;
+        }
+
+        /* ─── Footer ─────────────────────────────────────── */
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            padding: 40px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .footer-tagline {
+            color: #cccccc;
+            font-family: var(--font-content);
+            font-size: 1rem;
+        }
+
+        .footer-right {
+            color: #cccccc;
+            font-family: var(--font-content);
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        /* ─── Responsive ─────────────────────────────────── */
+        @media (max-width: 768px) {
+            .content-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .text-col {
+                width: 100%;
+                padding: 60px 0 10px;
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero-headline {
+                text-align: center;
+                padding-right: 0;
+                font-size: 1.85rem;
+            }
+
+            .subtitle {
+                text-align: center;
+                font-size: 1.1rem;
+            }
+
+            .calendar-col {
+                width: 100%;
+                padding: 20px;
+            }
+
+            .scarcity-row {
+                margin-top: 20px;
+            }
+
+            .scarcity-badge {
+                padding: 20px;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .footer-right {
+                text-align: center;
+            }
+        }
+
+        /* ─── Entrance Animations ────────────────────────── */
+        .animate-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideLeft 0.7s ease forwards;
+        }
+
+        .animate-right {
+            opacity: 0;
+            transform: translateX(30px);
+            animation: slideRight 0.7s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes slideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header v2 — logo only, Omnia-style tall header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="header-logo-col">
+                <a href="index.html">
+                    <img src="assets/logo/cause72deploy_transparent_logo_no_tagline.png" alt="Cause72" class="header-logo">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main-section">
+        <div class="bg-overlay"></div>
+
+        <div class="content-row">
+
+            <!-- Left Column: Text (43.1%) -->
+            <div class="text-col animate-left">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i>Back to Home
+                </a>
+
+                <h1 class="hero-headline">
+                    <strong>
+                        <span class="white">Schedule Your </span>
+                        <span class="accent">Qualification Call</span>
+                    </strong>
+                </h1>
+
+                <p class="subtitle">
+                    <span>Connect with our team to discuss how Cause72 can deliver pre-qualified, high-intent personal
+                        injury leads tailored to your firm's exact criteria.</span>
+                </p>
+
+                <ul class="benefit-list">
+                    <li><i class="fas fa-clock b-icon"></i>30-minute strategic consultation</li>
+                    <li><i class="fas fa-users b-icon"></i>Meet with our partnership team</li>
+                    <li><i class="fas fa-chart-line b-icon"></i>Discuss your growth objectives</li>
+                    <li><i class="fas fa-clipboard-check b-icon"></i>Review qualification criteria</li>
+                    <li><i class="fas fa-map-marker-alt b-icon"></i>Explore territory availability</li>
+                </ul>
+
+                <!-- Scarcity Badge -->
+                <div class="scarcity-row">
+                    <div class="scarcity-badge">
+                        <h2>Limited Territories</h2>
+                        <p>We partner with select firms in each market</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Calendar (56.8%) -->
+            <div class="calendar-col animate-right">
+                <!--
+                    ═══════════════════════════════════════════════════
+                    EMBED YOUR CALENDAR HERE
+                    
+                    Option 1: Calendly
+                    <div class="calendly-inline-widget" 
+                         data-url="https://calendly.com/YOUR-LINK"
+                         style="min-width:320px;height:560px;">
+                    </div>
+                    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                    
+                    Option 2: GoHighLevel / LeadConnector
+                    Paste your appointment widget embed code here.
+                    ═══════════════════════════════════════════════════
+                -->
+                <div class="calendar-placeholder">
+                    <i class="far fa-calendar-alt cal-icon"></i>
+                    <h3>Cause72 Partnership Call</h3>
+                    <div class="cal-meta">
+                        <span><i class="far fa-clock"></i> 30 Mins</span>
+                        <span><i class="fas fa-globe"></i> America/New_York (EST)</span>
+                    </div>
+                    <p>Select a date and time to discuss territory availability and partnership criteria for your firm.
+                    </p>
+                    <a href="https://calendly.com/YOUR-LINK" class="btn-book" target="_blank" rel="noopener">
+                        Schedule Meeting <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer — identical structure to homepage -->
+    <footer class="site-footer">
+        <div class="section-inner">
+            <div class="footer-inner">
+                <div class="footer-left">
+                    <a href="index.html">
+                        <img src="assets/logo/cause72deploy_transparent_logo_no_tagline.png" alt="Cause72" class="footer-logo">
+                    </a>
+                    <span class="footer-tagline">The Intelligence Layer Behind Top PI Firms</span>
+                </div>
+                <div class="footer-right">
+                    © 2026 Cause72. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

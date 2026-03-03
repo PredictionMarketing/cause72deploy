@@ -1,0 +1,13 @@
+Key details on running MailWizz across multiple servers:
+Licensing: Each installation requires its own license.
+Delivery Servers: MailWizz allows adding unlimited SMTP or API delivery servers in the backend, allowing for automatic server rotation, load balancing, and quota management (e.g., changing servers every 
+ sent emails).
+Infrastructure Scaling: For very high volume, you can use multiple web servers behind a load balancer, but you must ensure shared file storage (e.g., for user uploads and assets) is synchronized using tools like rsync.
+Database: A single, robust database server should be used to ensure data consistency across the application, usually requiring strong RAM and CPU resources. 
+MailWizz
+MailWizz
+ +5
+If your goal is to use multiple IP addresses for sending, you can configure MailWizz's delivery server settings to rotate between them.
+
+https://www.mailwizz.com/kb/add-delivery-servers-individual-customer/
+https://www.mailwizz.com/pricing/
